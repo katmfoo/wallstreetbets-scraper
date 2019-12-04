@@ -28,6 +28,9 @@ response = requests.get(
 # regex for alpha only
 alpha_regex = re.compile('[^a-zA-Z]')
 
+# setup array of additional ignored stock symbols
+additional_words = ['keys', 'com', 'has', 'co', 'ive', 'info', 'wins', 'apps', 'tv', 'jobs', 'www']
+
 # open symbols file to write to
 util.log('Opening symbols.txt file for writing to...')
 symbols_file = open('symbols.txt', 'w+')
@@ -37,7 +40,7 @@ for symbol_obj in response.json():
     # make symbol into lowercase alpha only characters
     symbol = alpha_regex.sub('', symbol_obj['symbol']).lower()
     # write symbol to file if its not an english word
-    if symbol not in words.words():
+    if symbol not in words.words() and symbol not in additional_words:
         symbols_file.write(symbol + "\n")
         util.log('Added "' + symbol + '" symbol to symbols.txt')
 
