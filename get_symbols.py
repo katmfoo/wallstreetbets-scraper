@@ -29,7 +29,7 @@ response = requests.get(
 alpha_regex = re.compile('[^a-zA-Z]')
 
 # setup array of additional ignored stock symbols
-additional_words = ['keys', 'com', 'has', 'co', 'ive', 'info', 'wins', 'apps', 'tv', 'jobs', 'www']
+additional_words = ['keys', 'com', 'has', 'co', 'ive', 'info', 'wins', 'apps', 'tv', 'jobs', 'www', 'ceo', 'jan', 'usa', 'pays', 'jets', 'laws', 'usb', 'eyes', 'expo', 'cars', 'cia', 'dvd']
 
 # open symbols file to write to
 util.log('Opening symbols.txt file for writing to...')

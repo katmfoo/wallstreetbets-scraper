@@ -4,6 +4,7 @@ import praw # reddit sdk
 from psaw import PushshiftAPI # reddit sdk wrapper
 import re
 import datetime
+from textblob import TextBlob
 
 # ==================================================================
 # Rowan University, Data Quality and Web Text Mining Final Project
@@ -53,8 +54,11 @@ api = PushshiftAPI(reddit)
 # setup submission generator to loop over reddit posts on given subreddit over given date range
 util.log('Setting up submission generator...')
 start_epoch=int(datetime.datetime(2018, 1, 1).timestamp())
-end_epoch=int(datetime.datetime(2018, 1, 2).timestamp())
+end_epoch=int(datetime.datetime(2019, 1, 1).timestamp())
 submission_generator = api.search_submissions(subreddit = 'stockmarket', after = start_epoch, before = end_epoch)
+
+# setup data object to write to
+data_obj = {}
 
 # loop over submissions
 util.log('Reading submissions for stock symbols...')
@@ -67,9 +71,21 @@ for submission in submission_generator:
     # get symbol matches using above search_string
     symbol_matches = get_symbol_matches(search_string)
 
+    # if we got any symbol matches, get sentiment of submission title and text
+    sentiment = 0
+    if symbol_matches:
+        textblob_obj = TextBlob(search_string)
+        sentiment_val = textblob_obj.sentiment
+        if sentiment_val.polarity >= 0:
+            sentiment = 1
+        else:
+            sentiment = -1
+
     # for each symbol found in the content
     for symbol in symbol_matches:
-        # TODO: log each match to the file with date and sentiment info
+        data_string = str(int(submission.created_utc)) + ',' + symbol + ',' + str(sentiment)
+        print(data_string)
+        symbol_mentions_file.write(data_string + '\n')
 
     # Increment submission num
     submission_num = submission_num + 1
