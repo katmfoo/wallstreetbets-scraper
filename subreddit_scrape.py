@@ -8,7 +8,7 @@ from textblob import TextBlob
 
 # ==================================================================
 # Rowan University, Data Quality and Web Text Mining Final Project
-# Patrick Richeal, last modified 2019-12-02
+# Patrick Richeal, last modified 2019-12-03
 # 
 # subreddit_scrape.py - Scrapes the desired subreddit for mention
 #     of stock ticker symbols and gathers data about frequency/time
@@ -57,12 +57,8 @@ start_epoch=int(datetime.datetime(2018, 1, 1).timestamp())
 end_epoch=int(datetime.datetime(2019, 1, 1).timestamp())
 submission_generator = api.search_submissions(subreddit = 'stockmarket', after = start_epoch, before = end_epoch)
 
-# setup data object to write to
-data_obj = {}
-
 # loop over submissions
 util.log('Reading submissions for stock symbols...')
-submission_num = 1
 for submission in submission_generator:
     # setup search string to get symbol matches on
     search_string = ' ' + submission.title + ' ' + submission.selftext + ' '
@@ -83,12 +79,10 @@ for submission in submission_generator:
 
     # for each symbol found in the content
     for symbol in symbol_matches:
+        # setup line that we will write to the file
         data_string = str(int(submission.created_utc)) + ',' + symbol + ',' + str(sentiment)
         print(data_string)
         symbol_mentions_file.write(data_string + '\n')
-
-    # Increment submission num
-    submission_num = submission_num + 1
 
 # close file
 symbol_mentions_file.close()

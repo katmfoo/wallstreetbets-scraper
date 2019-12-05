@@ -6,7 +6,7 @@ from nltk.corpus import words
 
 # ==================================================================
 # Rowan University, Data Quality and Web Text Mining Final Project
-# Patrick Richeal, last modified 2019-12-02
+# Patrick Richeal, last modified 2019-12-03
 # 
 # get_symbols.py - Retrieves stock ticker symbols and saves to file
 #
@@ -29,7 +29,7 @@ response = requests.get(
 alpha_regex = re.compile('[^a-zA-Z]')
 
 # setup array of additional ignored stock symbols
-additional_words = ['keys', 'com', 'has', 'co', 'ive', 'info', 'wins', 'apps', 'tv', 'jobs', 'www', 'ceo', 'jan', 'usa', 'pays', 'jets', 'laws', 'usb', 'eyes', 'expo', 'cars', 'cia', 'dvd']
+additional_words = ['keys', 'com', 'has', 'co', 'ive', 'info', 'wins', 'apps', 'tv', 'jobs', 'www', 'ceo', 'jan', 'usa', 'pays', 'jets', 'laws', 'usb', 'eyes', 'expo', 'cars', 'cia', 'dvd', 'org', 'fb', 'ty', 'nov', 'ipo', 'usd', 'cbd']
 
 # open symbols file to write to
 util.log('Opening symbols.txt file for writing to...')
