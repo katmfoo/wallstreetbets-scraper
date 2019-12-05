@@ -58,7 +58,7 @@ for week_list in data_obj.items():
     data_obj[week_list[0]] = sorted(week_list[1], key = lambda i: i['mentions'], reverse=True)
 
 # dump dictoinary object to json file
-symbol_mentions_file.write(json.dumps(data_obj, sort_keys=True))
+symbol_mentions_file.write(json.dumps(data_obj, sort_keys=True, indent=2))
 
 # close file
 symbol_mentions_file.close()
