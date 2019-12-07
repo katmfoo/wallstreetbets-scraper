@@ -4,7 +4,7 @@ import json
 
 # ==================================================================
 # Rowan University, Data Quality and Web Text Mining Final Project
-# Patrick Richeal, last modified 2019-12-03
+# Patrick Richeal, last modified 2019-12-07
 # 
 # generate_json.py - Translates the symbol_mentions.csv file into a
 #     dictionary like file that shows the score of each symbol for

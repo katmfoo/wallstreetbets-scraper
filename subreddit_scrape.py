@@ -55,7 +55,7 @@ api = PushshiftAPI(reddit)
 util.log('Setting up submission generator...')
 start_epoch=int(datetime.datetime(2018, 1, 1).timestamp())
 end_epoch=int(datetime.datetime(2019, 1, 1).timestamp())
-submission_generator = api.search_submissions(subreddit = 'stockmarket', after = start_epoch, before = end_epoch)
+submission_generator = api.search_submissions(subreddit = 'stocks', after = start_epoch, before = end_epoch)
 
 # loop over submissions
 util.log('Reading submissions for stock symbols...')
